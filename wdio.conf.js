@@ -1,6 +1,8 @@
 const webpackConfig = require('./webpack.config');
 const PORT = 3000;
 
+console.log('JOEY ::: process.env', process.env);
+
 exports.config = {
 
   //
@@ -133,8 +135,24 @@ exports.config = {
   services: [
     'selenium-standalone',
     'static-server',
-    'webpack'
+    'webpack',
+    'sauce'
   ],//
+
+  // SAUCE LABS
+  user : process.env.SAUCE_USERNAME,
+  key: process.env.SAUCE_ACCESS_KEY,
+  sauceConnect: process.env.TRAVIS, // only start sauce on travisCI
+  sauceConnectOpts : {
+    // Log output from the `sc` process to stdout?
+    verbose: false,
+
+    // Enable verbose debugging (optional)
+    verboseDebugging: false,
+
+    port: 4445,
+  },
+
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
   // see also: http://webdriver.io/guide/testrunner/frameworks.html

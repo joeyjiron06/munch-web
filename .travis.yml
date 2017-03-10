@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+- '6'
+install:
+- npm install
+script:
+- npm test
+env:
+  matrix:
+  - CXX=g++-4.8
+  global:
+    SAUCE_USERNAME: joeyjiron06
+    secure: E2fv5hbaeK8ifXeNvXvHhnAaotGMHNXUqLBzbhNChjyi60hpqw3S9cXXOMHbovLRmQcjJgYr6U11AW8rZscexICPsJlDQR07aaTA1BZogNbxrJSZgjkS+ByBpMQ1gfHYYKorFwykl3RL7caScJPfxvEAf24ktryX8nD461/w9aS3WF2AFsE2vM/l/aRJBCCT3CQzYGr3OpmRg0kGvPikSPg3jQ1RHL64Q/j8AisXJWG+gVT6m9yQn/ewwSiewm689q12WY4/Ms+YYpnNaqDwITHoFD3EKRrxeQ1SJgO1X7oTwJ7PAVYx65EdEelUMawlYc4yQAn8HnK37tm2+ovTISXIFqg0UlJ+s6rlK7eCk4PDB0RCdXGMbRS/1a3iUmJAEfqFt3LDW2GV01bFp88VDtLTqpqyvTEVxWdBzIz3T6TH0Zv7AsyDSxybhVLpXDJgYz+yjvYhUnueNTpw3Pi0Dake7ox44UdBzBuPJSiyATW1hqSYK6ljV/0nNee9URK81J3hO/aX3J1cVXasOKTp/0bHOOt2n8YVWxfmWhmxmS5BV/oUt92Pe0OHkJdEH+Ybnjf9eyGAeQVr+saV6Tq5YorTkqes8kQDGw6lNZy2D0ank9AqXRGzfcA5P7oXJp474PRWVvmXEWNPsd1DbmwDjzeC3JMe4j2O3T1lWgq9riY=
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+  sauce_connect:
+    username: ${SAUCE_USERNAME}
+    access_key: ${SAUCE_ACCESS_KEY}
