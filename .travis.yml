@@ -13,12 +13,12 @@ env:
 
 install:
   - nvm install $NODE_VERSION
+  - nvm use $NODE_VERSION
   - npm install --silent
   - curl https://gist.github.com/santiycr/5139565/raw/sauce_connect_setup.sh | bash  # setup sauce labs
 
 script:
-  - nvm use $NODE_VERSION
-#  - npm test
+  - npm test
 
 addons:
   apt:
