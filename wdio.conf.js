@@ -71,28 +71,34 @@ exports.config = {
     {
       browserName: 'chrome',
       platform : 'macOS 10.12',
+      'tunnel-identifier' : process.env.TRAVIS_JOB_NUMBER
     },
     {
       browserName : 'firefox',
       platform : 'macOS 10.12',
+      'tunnel-identifier' : process.env.TRAVIS_JOB_NUMBER
     },
     {
       browserName : 'safari',
       platform : 'macOS 10.12',
+      'tunnel-identifier' : process.env.TRAVIS_JOB_NUMBER
     },
 
     // WINDOWS 10
     {
       browserName: 'chrome',
-      platform : 'Windows 10'
+      platform : 'Windows 10',
+      'tunnel-identifier' : process.env.TRAVIS_JOB_NUMBER
     },
     {
       browserName : 'firefox',
-      platform : 'Windows 10'
+      platform : 'Windows 10',
+      'tunnel-identifier' : process.env.TRAVIS_JOB_NUMBER
     },
     {
       browserName : 'MicrosoftEdge',
-      platform : 'Windows 10'
+      platform : 'Windows 10',
+      'tunnel-identifier' : process.env.TRAVIS_JOB_NUMBER
     },
   ],
   //
