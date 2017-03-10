@@ -8,6 +8,7 @@
     "build": "npm run clean && webpack -p && cp src/index.html dist/index.html",
     "build-dev": "npm run clean && webpack -d && cp src/index.html dist/index.html",
     "clean": "rm -rf dist",
+    "test" : "npm run test-acceptance",
     "test-acceptance": "npm run build && wdio"
   },
   "repository": {
