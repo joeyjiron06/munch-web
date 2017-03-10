@@ -1,7 +1,4 @@
-const webpackConfig = require('./webpack.config');
 const PORT = 3000;
-
-console.log('JOEY ::: process.env', process.env);
 
 exports.config = {
 
@@ -65,13 +62,39 @@ exports.config = {
   // Sauce Labs platform configurator - a great tool to configure your capabilities:
   // https://docs.saucelabs.com/reference/platforms-configurator
   //
-  capabilities: [{
+  capabilities: [
     // maxInstances can get overwritten per capability. So if you have an in-house Selenium
     // grid with only 5 firefox instances available you can make sure that not more than
     // 5 instances get started at a time.
-    maxInstances: 5,
-    browserName: 'chrome'
-  }],
+
+    //  MAC OSX
+    {
+      browserName: 'chrome',
+      platform : 'macOS 10.12',
+    },
+    {
+      browserName : 'firefox',
+      platform : 'macOS 10.12',
+    },
+    {
+      browserName : 'safari',
+      platform : 'macOS 10.12',
+    },
+
+    // WINDOWS 10
+    {
+      browserName: 'chrome',
+      platform : 'Windows 10'
+    },
+    {
+      browserName : 'firefox',
+      platform : 'Windows 10'
+    },
+    {
+      browserName : 'MicrosoftEdge',
+      platform : 'Windows 10'
+    },
+  ],
   //
   // ===================
   // Test Configurations
@@ -142,7 +165,7 @@ exports.config = {
   // SAUCE LABS
   user : process.env.SAUCE_USERNAME,
   key: process.env.SAUCE_ACCESS_KEY,
-  sauceConnect: process.env.TRAVIS, // only start sauce on travisCI
+  sauceConnect: process.env.TRAVIS || true, // only start sauce on travisCI
   sauceConnectOpts : {
     // Log output from the `sc` process to stdout?
     verbose: false,
