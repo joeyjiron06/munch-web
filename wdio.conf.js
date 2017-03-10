@@ -160,15 +160,15 @@ exports.config = {
     'static-server',
     'webpack',
     'sauce'
-  ],//
+  ],
 
   // SAUCE LABS
   user : process.env.SAUCE_USERNAME,
   key: process.env.SAUCE_ACCESS_KEY,
-  sauceConnect: process.env.TRAVIS || true, // only start sauce on travisCI
+  sauceConnect: process.env.TRAVIS, // only start sauce on travisCI
   sauceConnectOpts : {
     // Log output from the `sc` process to stdout?
-    verbose: false,
+    verbose: true,
 
     // Enable verbose debugging (optional)
     verboseDebugging: false,
