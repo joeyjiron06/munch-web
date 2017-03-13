@@ -1,6 +1,10 @@
 const PORT = 3000;
+const { TRAVIS_JOB_NUMBER,
+        SAUCE_USERNAME,
+        SAUCE_ACCESS_KEY,
+        TRAVIS } = process.env;
 
-exports.config = {
+const config = {
 
   //
   // ==================
@@ -62,45 +66,9 @@ exports.config = {
   // Sauce Labs platform configurator - a great tool to configure your capabilities:
   // https://docs.saucelabs.com/reference/platforms-configurator
   //
-  capabilities: [
-    // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-    // grid with only 5 firefox instances available you can make sure that not more than
-    // 5 instances get started at a time.
-
-    //  MAC OSX
-    {
-      browserName: 'chrome',
-      platform : 'macOS 10.12',
-      'tunnel-identifier' : process.env.TRAVIS_JOB_NUMBER
-    },
-    {
-      browserName : 'firefox',
-      platform : 'macOS 10.12',
-      'tunnel-identifier' : process.env.TRAVIS_JOB_NUMBER
-    },
-    {
-      browserName : 'safari',
-      platform : 'macOS 10.12',
-      'tunnel-identifier' : process.env.TRAVIS_JOB_NUMBER
-    },
-
-    // WINDOWS 10
-    {
-      browserName: 'chrome',
-      platform : 'Windows 10',
-      'tunnel-identifier' : process.env.TRAVIS_JOB_NUMBER
-    },
-    {
-      browserName : 'firefox',
-      platform : 'Windows 10',
-      'tunnel-identifier' : process.env.TRAVIS_JOB_NUMBER
-    },
-    {
-      browserName : 'MicrosoftEdge',
-      platform : 'Windows 10',
-      'tunnel-identifier' : process.env.TRAVIS_JOB_NUMBER
-    },
-  ],
+  capabilities: [{
+      browserName: 'chrome' // default to chrome
+  }],
   //
   // ===================
   // Test Configurations
@@ -167,20 +135,6 @@ exports.config = {
     'webpack',
     'sauce'
   ],
-
-  // SAUCE LABS
-  user : process.env.SAUCE_USERNAME,
-  key: process.env.SAUCE_ACCESS_KEY,
-  sauceConnect: process.env.TRAVIS, // only start sauce on travisCI
-  sauceConnectOpts : {
-    // Log output from the `sc` process to stdout?
-    verbose: true,
-
-    // Enable verbose debugging (optional)
-    verboseDebugging: false,
-
-    port: 4445,
-  },
 
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
@@ -273,3 +227,46 @@ exports.config = {
   // onComplete: function(exitCode) {
   // }
 };
+
+
+// TRAVIS testing - do sauce labs on multiple browsers
+if (TRAVIS) {
+  // SAUCE LABS config
+  config.user = SAUCE_USERNAME;
+  config.key = SAUCE_ACCESS_KEY;
+  config.sauceConnect = true;
+  config.sauceConnectOpts = {
+    verbose: true, // Log output from the `sc` process to stdout?
+    verboseDebugging: false,     // Enable verbose debugging (optional)
+    port: 4445,
+  };
+
+  // BROWSERS - all major browsers on roughly the latets OSes
+  config.capabilities = [
+    //  MAC OSX
+    {
+      browserName: 'chrome',
+      platform : 'macOS 10.12',
+      'tunnel-identifier' : TRAVIS_JOB_NUMBER
+    },
+    {
+      browserName : 'firefox',
+      platform : 'macOS 10.12',
+      'tunnel-identifier' : TRAVIS_JOB_NUMBER
+    },
+    {
+      browserName : 'safari',
+      platform : 'macOS 10.12',
+      'tunnel-identifier' : TRAVIS_JOB_NUMBER
+    },
+
+    // WINDOWS 10
+    {
+      browserName : 'MicrosoftEdge',
+      platform : 'Windows 10',
+      'tunnel-identifier' : TRAVIS_JOB_NUMBER
+    },
+  ];
+}
+
+exports.config = config;

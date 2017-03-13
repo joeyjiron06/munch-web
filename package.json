@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build:dev && webpack-dev-server",
-    "build": "npm run clean && webpack -p && cp src/index.html dist/index.html",
-    "build-dev": "npm run clean && webpack -d && cp src/index.html dist/index.html",
+    "build": "npm run clean && webpack -p",
+    "build-dev": "npm run clean && webpack -d",
     "clean": "rm -rf dist",
-    "test" : "npm run test-acceptance",
+    "test": "npm run test-acceptance",
     "test-acceptance": "npm run build && wdio"
   },
   "repository": {
@@ -34,6 +34,7 @@
     "babel-register": "^6.23.0",
     "chai": "^3.5.0",
     "chai-spies": "^0.7.1",
+    "copy-webpack-plugin": "^4.0.1",
     "enzyme": "^2.7.1",
     "jsdom": "^9.11.0",
     "material-ui": "^0.17.0",

@@ -1,4 +1,7 @@
 const path = require("path");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+
 const DIST_DIR = path.resolve(__dirname, "dist");
 const SRC_DIR = path.resolve(__dirname, "src");
 
@@ -27,5 +30,11 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins : [
+    new CopyWebpackPlugin([
+      {from : path.join(SRC_DIR, 'index.html')}
+    ])
+
+  ]
 };
